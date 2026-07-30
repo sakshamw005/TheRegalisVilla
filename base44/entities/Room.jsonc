@@ -1,0 +1,183 @@
+{
+  "name": "Room",
+  "type": "object",
+  "properties": {
+    "property_id": {
+      "type": "string",
+      "title": "Property ID"
+    },
+    "property_name": {
+      "type": "string",
+      "title": "Property Name"
+    },
+    "floor_id": {
+      "type": "string",
+      "title": "Floor ID"
+    },
+    "floor_name": {
+      "type": "string",
+      "title": "Floor Name"
+    },
+    "name": {
+      "type": "string",
+      "title": "Room Name"
+    },
+    "room_number": {
+      "type": "string",
+      "title": "Room Number"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Bedroom",
+        "Living Room",
+        "Kitchen",
+        "Dining Room",
+        "Private Room",
+        "Family Suite",
+        "Studio",
+        "Dormitory",
+        "Balcony",
+        "Hall",
+        "Conference Room",
+        "Swimming Pool",
+        "Garden",
+        "Terrace",
+        "Storage",
+        "Custom"
+      ],
+      "default": "Bedroom",
+      "title": "Room Category"
+    },
+    "bed_type": {
+      "type": "string",
+      "enum": [
+        "Single",
+        "Double",
+        "Queen",
+        "King",
+        "Twin",
+        "Dormitory",
+        "Bunk Bed",
+        "Custom"
+      ],
+      "default": "Double",
+      "title": "Bed Type"
+    },
+    "capacity": {
+      "type": "number",
+      "default": 2,
+      "title": "Capacity (Guests)"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "price_per_night": {
+      "type": "number",
+      "default": 0,
+      "title": "Price Per Night"
+    },
+    "weekend_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Weekend Price"
+    },
+    "seasonal_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Seasonal Price"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Room Images"
+    },
+    "amenities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Amenities"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "available",
+        "booked",
+        "maintenance",
+        "inactive",
+        "cleaning_required"
+      ],
+      "default": "available",
+      "title": "Status"
+    }
+  },
+  "required": [
+    "property_id",
+    "floor_id",
+    "name"
+  ],
+  "rls": {
+    "read": true,
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_a"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_b"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_a"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_b"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_a"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_b"
+          }
+        }
+      ]
+    }
+  }
+}

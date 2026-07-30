@@ -1,0 +1,108 @@
+{
+  "name": "Property",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Property Name"
+    },
+    "cover_image": {
+      "type": "string",
+      "title": "Cover Image URL",
+      "format": "url"
+    },
+    "gallery": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Gallery Images"
+    },
+    "address": {
+      "type": "string",
+      "title": "Address"
+    },
+    "city": {
+      "type": "string",
+      "title": "City"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "maintenance"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "total_floors": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Floors"
+    },
+    "total_rooms": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Rooms"
+    },
+    "rating": {
+      "type": "number",
+      "default": 5,
+      "title": "Rating"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": true,
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_a"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_b"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_a"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_b"
+          }
+        }
+      ]
+    }
+  }
+}

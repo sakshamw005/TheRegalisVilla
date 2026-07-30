@@ -1,0 +1,94 @@
+{
+  "name": "Payment",
+  "type": "object",
+  "properties": {
+    "booking_id": {
+      "type": "string",
+      "title": "Booking ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "property_name": {
+      "type": "string",
+      "title": "Property Name"
+    },
+    "amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Amount"
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "cash",
+        "card",
+        "upi",
+        "bank_transfer",
+        "cheque",
+        "other"
+      ],
+      "default": "cash",
+      "title": "Payment Method"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "pending",
+        "refunded"
+      ],
+      "default": "completed",
+      "title": "Payment Status"
+    },
+    "note": {
+      "type": "string",
+      "title": "Note"
+    },
+    "recorded_by": {
+      "type": "string",
+      "title": "Recorded By"
+    }
+  },
+  "required": [
+    "booking_id",
+    "amount"
+  ],
+  "rls": {
+    "read": true,
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_a"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_b"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

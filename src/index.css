@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Regalis Villa Luxury Palette */
+    --background: 0 0% 6%;          /* #0F0F0F matte black */
+    --foreground: 0 0% 100%;       /* #FFFFFF */
+    --card: 0 0% 10%;              /* #1A1A1A dark charcoal */
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 43 74% 49%;        /* #C9A227 rich gold */
+    --primary-foreground: 0 0% 6%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 43 74% 49%;
+    --accent-foreground: 0 0% 6%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 43 30% 20%;
+    --input: 0 0% 16%;
+    --ring: 43 74% 49%;
+    --gold: 43 74% 49%;
+    --gold-soft: 43 60% 38%;
+    --charcoal: 0 0% 10%;
+
+    --radius: 0.75rem;
+    --font-heading: 'Playfair Display', serif;
+    --font-display: 'Cinzel', serif;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', 'Poppins', sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 64%;
+    --sidebar-primary: 43 74% 49%;
+    --sidebar-primary-foreground: 0 0% 6%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 43 20% 18%;
+    --sidebar-ring: 43 74% 49%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-color: #0F0F0F;
+  }
+}
+
+@layer components {
+  .glass {
+    background: linear-gradient(145deg, rgba(26,26,26,0.85), rgba(15,15,15,0.92));
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(201,162,39,0.18);
+  }
+  .glass-strong {
+    background: linear-gradient(145deg, rgba(26,26,26,0.95), rgba(15,15,15,0.98));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(201,162,39,0.22);
+  }
+  .gold-border {
+    border: 1px solid rgba(201,162,39,0.35);
+  }
+  .gold-text {
+    color: #C9A227;
+  }
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #E6C766, #C9A227, #A8841D);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .gold-glow {
+    box-shadow: 0 0 24px rgba(201,162,39,0.15), 0 8px 32px rgba(0,0,0,0.6);
+  }
+  .gold-glow-hover {
+    transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+  }
+  .gold-glow-hover:hover {
+    box-shadow: 0 0 32px rgba(201,162,39,0.25), 0 12px 40px rgba(0,0,0,0.7);
+    border-color: rgba(201,162,39,0.45);
+    transform: translateY(-4px);
+  }
+  .luxury-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .luxury-scrollbar::-webkit-scrollbar-track { background: #0F0F0F; }
+  .luxury-scrollbar::-webkit-scrollbar-thumb { background: rgba(201,162,39,0.3); border-radius: 10px; }
+  .luxury-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(201,162,39,0.5); }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+  .animate-fade-down {
+    animation: fadeDown 0.5s ease-out forwards;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+  .animate-shimmer {
+    background: linear-gradient(90deg, rgba(201,162,39,0) 0%, rgba(201,162,39,0.12) 50%, rgba(201,162,39,0) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.6s infinite;
+  }
+  .text-balance { text-wrap: balance; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulseGold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,162,39,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(201,162,39,0); }
+}

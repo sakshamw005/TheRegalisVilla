@@ -1,0 +1,196 @@
+{
+  "name": "Booking",
+  "type": "object",
+  "properties": {
+    "booking_id": {
+      "type": "string",
+      "title": "Booking ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "customer_phone": {
+      "type": "string",
+      "title": "Customer Phone"
+    },
+    "property_id": {
+      "type": "string",
+      "title": "Property ID"
+    },
+    "property_name": {
+      "type": "string",
+      "title": "Property Name"
+    },
+    "floor_id": {
+      "type": "string",
+      "title": "Floor ID"
+    },
+    "floor_name": {
+      "type": "string",
+      "title": "Floor Name"
+    },
+    "room_id": {
+      "type": "string",
+      "title": "Room ID"
+    },
+    "room_name": {
+      "type": "string",
+      "title": "Room Name"
+    },
+    "booking_type": {
+      "type": "string",
+      "enum": [
+        "room",
+        "entire_floor"
+      ],
+      "default": "room",
+      "title": "Booking Type"
+    },
+    "check_in": {
+      "type": "string",
+      "format": "date",
+      "title": "Check-In Date"
+    },
+    "check_out": {
+      "type": "string",
+      "format": "date",
+      "title": "Check-Out Date"
+    },
+    "total_nights": {
+      "type": "number",
+      "default": 1,
+      "title": "Total Nights"
+    },
+    "room_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Room Price"
+    },
+    "discount": {
+      "type": "number",
+      "default": 0,
+      "title": "Discount"
+    },
+    "taxes": {
+      "type": "number",
+      "default": 0,
+      "title": "Taxes"
+    },
+    "advance_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Advance Amount"
+    },
+    "remaining_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Remaining Amount"
+    },
+    "grand_total": {
+      "type": "number",
+      "default": 0,
+      "title": "Grand Total"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "partially_paid",
+        "paid"
+      ],
+      "default": "pending",
+      "title": "Payment Status"
+    },
+    "booking_status": {
+      "type": "string",
+      "enum": [
+        "reserved",
+        "checked_in",
+        "checked_out",
+        "cancelled"
+      ],
+      "default": "reserved",
+      "title": "Booking Status"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "booked_by": {
+      "type": "string",
+      "title": "Booked By (User Name)"
+    },
+    "booked_by_id": {
+      "type": "string",
+      "title": "Booked By User ID"
+    },
+    "authorized_by": {
+      "type": "string",
+      "title": "Authorized By"
+    },
+    "authorization_method": {
+      "type": "string",
+      "enum": [
+        "pin",
+        "biometric",
+        "admin"
+      ],
+      "default": "pin",
+      "title": "Authorization Method"
+    },
+    "authorization_time": {
+      "type": "string",
+      "title": "Authorization Timestamp"
+    }
+  },
+  "required": [
+    "customer_name",
+    "property_id",
+    "check_in",
+    "check_out"
+  ],
+  "rls": {
+    "read": true,
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_a"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_b"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.booked_by_id": "{{user.id}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

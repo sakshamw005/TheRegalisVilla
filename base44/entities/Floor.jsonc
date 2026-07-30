@@ -1,0 +1,115 @@
+{
+  "name": "Floor",
+  "type": "object",
+  "properties": {
+    "property_id": {
+      "type": "string",
+      "title": "Property ID"
+    },
+    "property_name": {
+      "type": "string",
+      "title": "Property Name"
+    },
+    "name": {
+      "type": "string",
+      "title": "Floor Name"
+    },
+    "floor_number": {
+      "type": "string",
+      "title": "Floor Number / Label"
+    },
+    "floor_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Entire Floor Price"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "image": {
+      "type": "string",
+      "title": "Floor Image URL",
+      "format": "url"
+    },
+    "allow_entire_floor_booking": {
+      "type": "boolean",
+      "default": true,
+      "title": "Allow Entire Floor Booking"
+    },
+    "room_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Room Count"
+    },
+    "order": {
+      "type": "number",
+      "default": 0,
+      "title": "Display Order"
+    }
+  },
+  "required": [
+    "property_id",
+    "name"
+  ],
+  "rls": {
+    "read": true,
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_a"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_b"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_a"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_b"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_a"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "owner_b"
+          }
+        }
+      ]
+    }
+  }
+}
